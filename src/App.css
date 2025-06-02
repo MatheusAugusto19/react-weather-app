@@ -71,3 +71,26 @@ button:hover {
   font-weight: bold;
   color: #333;
 }
+
+.temperatura-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* Espaço entre o ícone e o texto */
+  margin: 1rem 0;
+}
+
+.icone-clima {
+  font-size: 6rem; /* Aumenta o tamanho do ícone */
+  color: #007bff; /* Cor do ícone */
+}
+
+.temperatura {
+  margin: 0; /* Remove a margem padrão do parágrafo */
+}
+
+.descricao {
+  text-transform: capitalize; /* Deixa a primeira letra maiúscula */
+  font-style: italic;
+  color: #555;
+}
