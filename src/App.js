@@ -3,15 +3,23 @@ import WeatherIcon from './WeatherIcon';
 import ForecastCard from './ForecastCard';
 import './App.css';
 
+
 const getBackgroundImage = (weatherId) => {
   switch (true) {
-    case weatherId >= 200 && weatherId < 300: return '/img/tempestade.jpg';
-    case weatherId >= 300 && weatherId < 600: return '/img/chuva.jpg';
-    case weatherId >= 600 && weatherId < 700: return '/img/neve.jpg';
-    case weatherId >= 700 && weatherId < 800: return '/img/nevoa.jpg'; 
-    case weatherId === 800: return '/img/ensolarado.jpg';
-    case weatherId > 800 && weatherId < 805: return '/img/nublado.jpg';
-    default: return '/img/default.jpg';
+    case weatherId >= 200 && weatherId < 300:
+      return `${process.env.PUBLIC_URL}/img/tempestade.jpg`;
+    case weatherId >= 300 && weatherId < 600:
+      return `${process.env.PUBLIC_URL}/img/chuva.jpg`;
+    case weatherId >= 600 && weatherId < 700:
+      return `${process.env.PUBLIC_URL}/img/neve.jpg`;
+    case weatherId >= 700 && weatherId < 800:
+      return `${process.env.PUBLIC_URL}/img/nevoa.jpg`; 
+    case weatherId === 800:
+      return `${process.env.PUBLIC_URL}/img/ensolarado.jpg`;
+    case weatherId > 800 && weatherId < 805:
+      return `${process.env.PUBLIC_URL}/img/nublado.jpg`;
+    default:
+      return `${process.env.PUBLIC_URL}/img/default.jpg`;
   }
 };
 
