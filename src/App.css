@@ -11,6 +11,9 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -20,7 +23,34 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 90%;
-  max-width: 400px;
+  max-width: 400px; 
+}
+
+.select-container {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.select-container select {
+  flex: 1;
+  width: 0;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: white;
+
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+select:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+
 }
 
 .titulo {
@@ -70,9 +100,10 @@ button:hover {
   color: #555;
 }
 
-.info-clima p {
+.info-clima {
   font-size: 1.1rem;
   color: #666;
+  margin-bottom: 0.5rem;
 }
 
 .info-clima .temperatura {
@@ -114,6 +145,27 @@ button:hover {
   margin: 20px auto; /* Centraliza o loader */
 }
 
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.forecast-card {
+  min-width: 80px;
+}
+
+.detalhes-adicionais {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -150,21 +202,20 @@ button:hover {
     padding: 1.5rem;
     margin: 1rem 0;
     width: 90%;
-  } /* <-- A CHAVE FOI ADICIONADA AQUI */
-
-  .titulo {
-    font-size: 1.8rem; /* Diminui o tamanho do título */
   }
 
-  /* A mudança mais importante: empilha o input e o botão */
+  .titulo {
+    font-size: 1.8rem;
+  }
+
   .input-container {
-    flex-direction: column; /* Muda a direção do flex para vertical */
-    gap: 0.8rem; /* Adiciona um espaço entre o input e o botão */
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
   .input-container input[type="text"],
   .input-container button {
-    width: 100%; /* Faz ambos ocuparem 100% da largura do container */
+    width: 100%;
   }
 
   .temperatura-container {
@@ -172,10 +223,49 @@ button:hover {
   }
 
   .temperatura {
-    font-size: 2.5rem; /* Diminui um pouco a temperatura */
+    font-size: 2.5rem;
   }
 
   .icone-clima {
-    font-size: 5rem; /* Diminui o ícone */
+    font-size: 5rem;
+  }
+}
+
+
+
+/* Aplica estes estilos APENAS em telas com largura máxima de 380px */
+@media (max-width: 380px) {
+  .container {
+    padding: 1rem; /* Diminui ainda mais o padding */
+  }
+
+  .titulo {
+    font-size: 1.5rem; /* Título um pouco menor */
+    margin-bottom: 1rem;
+  }
+
+  .select-container select, 
+  .detalhes-adicionais p {
+    font-size: 0.9rem; /* Diminui a fonte dos dropdowns e detalhes */
+  }
+
+  .temperatura {
+    font-size: 2.2rem; /* Temperatura principal menor */
+  }
+
+  .icone-clima {
+    font-size: 4.5rem; /* Ícone principal menor */
+  }
+
+  .forecast-card {
+    padding: 0.5rem; /* Menos padding nos cards de previsão */
+  }
+
+  .forecast-icon {
+    font-size: 2rem;
+  }
+
+  .forecast-temp {
+    font-size: 1rem;
   }
 }
