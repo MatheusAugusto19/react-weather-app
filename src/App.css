@@ -1,3 +1,8 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 body {
   background-color: #f0f2f5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,9 +58,13 @@ button:hover {
   background-color: #0056b3;
 }
 
+
 .info-clima {
   margin-top: 1.5rem;
+  animation: fadeInUp 0.5s ease-in-out forwards;
 }
+
+
 
 .info-clima h2 {
   color: #555;
@@ -93,4 +102,80 @@ button:hover {
   text-transform: capitalize; /* Deixa a primeira letra maiúscula */
   font-style: italic;
   color: #555;
+}
+/* Estilo do Spinner de Carregamento */
+.loader {
+  border: 5px solid #f3f3f3; /* Cinza claro */
+  border-top: 5px solid #007bff; /* Azul */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; /* Centraliza o loader */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilo da Mensagem de Erro */
+.error-message {
+  background-color: #f8d7da; /* Fundo vermelho claro */
+  color: #721c24; /* Texto vermelho escuro */
+  padding: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: capitalize; /* Deixa a primeira letra maiúscula */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*Media Queries */
+
+/* Aplica estes estilos em telas com largura máxima de 480px (típico para celulares) */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    width: 90%;
+  } /* <-- A CHAVE FOI ADICIONADA AQUI */
+
+  .titulo {
+    font-size: 1.8rem; /* Diminui o tamanho do título */
+  }
+
+  /* A mudança mais importante: empilha o input e o botão */
+  .input-container {
+    flex-direction: column; /* Muda a direção do flex para vertical */
+    gap: 0.8rem; /* Adiciona um espaço entre o input e o botão */
+  }
+
+  .input-container input[type="text"],
+  .input-container button {
+    width: 100%; /* Faz ambos ocuparem 100% da largura do container */
+  }
+
+  .temperatura-container {
+    gap: 0.5rem;
+  }
+
+  .temperatura {
+    font-size: 2.5rem; /* Diminui um pouco a temperatura */
+  }
+
+  .icone-clima {
+    font-size: 5rem; /* Diminui o ícone */
+  }
 }

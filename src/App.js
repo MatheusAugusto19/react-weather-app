@@ -5,10 +5,17 @@ import './App.css';
 function App() {
   const [cidade, setCidade] = useState('');
   const [dadosClima, setDadosClima] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(''); // NOVO estado para o erro
 
   const buscarClima = async () => {
+    if (!cidade) return;
+    
+    setIsLoading(true);
+    setDadosClima(null);
+    setError(''); // MODIFICADO: Limpa erros antigos
+
     const apiKey = 'e7b3396f1c6609ded4f6ad12fe0d4932';
-    // <-- CORRIGIDO: A URL foi limpa, usando a sintaxe correta de template string.
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`;
 
     try {
@@ -18,12 +25,15 @@ function App() {
       if (dados.cod === 200) {
         setDadosClima(dados);
       } else {
-        // Agora, este alerta só aparecerá se a cidade realmente não for encontrada pela API.
-        alert('Cidade não encontrada. Tente novamente.');
+        // MODIFICADO: Define o erro em vez de usar alert()
+        setError(dados.message || 'Cidade não encontrada. Tente novamente.');
       }
     } catch (erro) {
       console.error("Erro ao buscar dados: ", erro);
-      alert('Ocorreu um erro. Tente novamente mais tarde.');
+      // MODIFICADO: Define o erro de rede
+      setError('Ocorreu um erro na comunicação com o servidor.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,12 +48,17 @@ function App() {
           value={cidade}
           onChange={(e) => setCidade(e.target.value)}
         />
-        <button onClick={buscarClima}>Pesquisar</button>
+        <button onClick={buscarClima} disabled={isLoading}>
+          {isLoading ? 'Buscando...' : 'Pesquisar'}
+        </button>
       </div>
 
-      {/* <-- CORRIGIDO: Este bloco foi movido para fora do "input-container". */}
-      {/* Ele agora é um irmão do input-container, não um filho. */}
-      {dadosClima && (
+
+      {error && <div className="error-message">{error}</div>}
+
+      {isLoading && <div className="loader"></div>}
+
+      {!isLoading && dadosClima && (
         <div className="info-clima">
           <h2>{dadosClima.name}</h2>
           <div className="temperatura-container">
@@ -56,10 +71,8 @@ function App() {
           <p>Umidade: {dadosClima.main.humidity}%</p>
         </div>
       )}
-      {/* <-- CORRIGIDO: A letra 's' que estava aqui foi removida. */}
     </div>
   );
 }
 
 export default App;
-// <-- CORRIGIDO: A chave '}' extra que estava aqui foi removida.
